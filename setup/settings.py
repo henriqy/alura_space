@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path, os #os - para manipular as variaveis de ambiente
-from dotenv import load_dotenv # carregar as variaveis de ambiente
+from pathlib import Path
+import os  # os - para manipular as variaveis de ambiente
+from dotenv import load_dotenv  # carregar as variaveis de ambiente
 
 load_dotenv()
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'galeria',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,6 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'setup/static') #indicando que arquivos staticos estaram dentro dessa pasta
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') #caminho absoluto do diretorio onde o python ira pegar esses arquivos
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
